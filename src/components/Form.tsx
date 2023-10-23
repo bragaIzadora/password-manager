@@ -1,4 +1,8 @@
-function Form() {
+type FormProps = {
+  onCancel: () => void;
+};
+
+function Form({ onCancel }: FormProps) {
   return (
     <div>
       <div>
@@ -26,14 +30,10 @@ function Form() {
         </label>
       </div>
       <div>
-        <button>
-          Cadastrar
-        </button>
+        <button>Cadastrar</button>
       </div>
       <div>
-        <button>
-          Cancelar
-        </button>
+        <button onClick={ onCancel }>Cancelar</button>
       </div>
 
     </div>
