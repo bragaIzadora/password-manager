@@ -8,13 +8,13 @@ function Form({ onCancel }: FormProps) {
       <div>
         <label htmlFor="serviceName">
           Nome do serviço
-          <input type="text" id="serviceName" name="serviceName" />
+          <input type="text" id="serviceName" name="serviceName" required />
         </label>
       </div>
       <div>
         <label htmlFor="login">
           Login
-          <input type="text" id="login" name="login" />
+          <input type="text" id="login" name="login" required />
         </label>
       </div>
       <div>
