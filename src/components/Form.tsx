@@ -18,14 +18,17 @@ function Form({ onCancel }: FormProps) {
 
     return { minimum, maximum, letterNumber, special };
   };
+
   const passwordCheck = isPasswordValid(password);
 
   const isFormValid = () => {
     return serviceName !== '' && login !== ''
     && Object.values(isPasswordValid(password)).every(Boolean);
   };
+
   const valido = 'valid-password-check';
   const invalido = 'invalid-password-check';
+
   return (
     <div>
       <div>
