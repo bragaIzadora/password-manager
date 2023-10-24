@@ -11,17 +11,21 @@ function Form({ onCancel }: FormProps) {
   const [url, setUrl] = useState('');
 
   const isPasswordValid = (passwordd: string) => {
-    const minimun = password.length >= 8;
+    const minimum = password.length >= 8;
     const maximum = password.length <= 16;
     const letterNumber = /[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/.test(passwordd);
     const special = /[!@#$%^&*(),.?":{}|<>]/.test(passwordd);
 
-    return minimun && maximum && letterNumber && special;
+    return { minimum, maximum, letterNumber, special };
   };
+  const passwordCheck = isPasswordValid(password);
 
   const isFormValid = () => {
-    return serviceName !== '' && login !== '' && isPasswordValid(password);
+    return serviceName !== '' && login !== ''
+    && Object.values(isPasswordValid(password)).every(Boolean);
   };
+  const valido = 'valid-password-check';
+  const invalido = 'invalid-password-check';
   return (
     <div>
       <div>
@@ -80,6 +84,20 @@ function Form({ onCancel }: FormProps) {
       </div>
       <div>
         <button onClick={ onCancel }>Cancelar</button>
+      </div>
+      <div>
+        <h3 className={ passwordCheck.minimum ? valido : invalido }>
+          Possuir 8 ou mais caracteres
+        </h3>
+        <h3 className={ passwordCheck.maximum ? valido : invalido }>
+          Possuir até 16 caracteres
+        </h3>
+        <h3 className={ passwordCheck.letterNumber ? valido : invalido }>
+          Possuir letras e números
+        </h3>
+        <h3 className={ passwordCheck.special ? valido : invalido }>
+          Possuir algum caractere especial
+        </h3>
       </div>
 
     </div>
