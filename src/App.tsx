@@ -13,10 +13,15 @@ type Service = {
 function App() {
   const [show, setShow] = useState(false);
   const [services, setServices] = useState<Service[]>([]);
+  const [hidePasswords, setHidePasswords] = useState(false);
 
   const handleCadastro = (newService: Service) => {
     setServices([...services, newService]);
     setShow(false);
+  };
+
+  const handleTogglePasswords = () => {
+    setHidePasswords(!hidePasswords);
   };
 
   return (
@@ -27,6 +32,15 @@ function App() {
       ) : (
         <button onClick={ () => setShow(true) }>Cadastrar nova senha</button>
       )}
+
+      <label>
+        <input
+          type="checkbox"
+          checked={ hidePasswords }
+          onChange={ handleTogglePasswords }
+        />
+        Esconder senhas
+      </label>
 
       {services.length === 0 ? (
         <p>Nenhuma senha cadastrada</p>
@@ -39,6 +53,8 @@ function App() {
               {service.login}
               -
               {service.password}
+              -
+              { hidePasswords ? '******' : service.password }
             </li>
           ))}
         </ul>
