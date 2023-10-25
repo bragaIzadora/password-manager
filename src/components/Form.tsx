@@ -2,9 +2,17 @@ import { useState } from 'react';
 
 type FormProps = {
   onCancel: () => void;
+  onCadastro: (newService: Service) => void;
 };
 
-function Form({ onCancel }: FormProps) {
+type Service = {
+  serviceName: string;
+  login: string;
+  password: string;
+  url: string;
+};
+
+function Form({ onCancel, onCadastro }: FormProps) {
   const [serviceName, setServiceName] = useState('');
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
@@ -24,6 +32,17 @@ function Form({ onCancel }: FormProps) {
   const isFormValid = () => {
     return serviceName !== '' && login !== ''
     && Object.values(isPasswordValid(password)).every(Boolean);
+  };
+
+  const handleCadastro = () => {
+    if (isFormValid()) {
+      const newService = { serviceName, login, password, url };
+      onCadastro(newService);
+      setServiceName('');
+      setLogin('');
+      setPassword('');
+      setUrl('');
+    }
   };
 
   const valido = 'valid-password-check';
@@ -83,7 +102,9 @@ function Form({ onCancel }: FormProps) {
         </label>
       </div>
       <div>
-        <button disabled={ !isFormValid() } onClick={ onCancel }>Cadastrar</button>
+        <button disabled={ !isFormValid() } onClick={ handleCadastro }>
+          Cadastrar
+        </button>
       </div>
       <div>
         <button onClick={ onCancel }>Cancelar</button>
