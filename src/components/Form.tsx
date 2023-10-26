@@ -17,6 +17,7 @@ function Form({ onCancel, onCadastro }: FormProps) {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [url, setUrl] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const isPasswordValid = (passwordd: string) => {
     const minimum = password.length >= 8;
@@ -80,7 +81,7 @@ function Form({ onCancel, onCadastro }: FormProps) {
         <label htmlFor="password">
           Senha
           <input
-            type="password"
+            type={ showPassword ? 'text' : 'password' }
             name="password"
             id="password"
             required
@@ -88,6 +89,15 @@ function Form({ onCancel, onCadastro }: FormProps) {
             onChange={ (e) => setPassword(e.target.value) }
           />
         </label>
+      </div>
+      <div>
+        <button
+          data-testid="show-hide-form-password"
+          onClick={ () => setShowPassword(!showPassword) }
+        >
+          { showPassword ? 'Esconder' : 'Mostrar' }
+          Senha
+        </button>
       </div>
       <div>
         <label htmlFor="url">
