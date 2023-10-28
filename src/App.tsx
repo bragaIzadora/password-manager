@@ -24,6 +24,11 @@ function App() {
     setHidePasswords(!hidePasswords);
   };
 
+  const handleRemoveSer = (index: number) => {
+    const upServices = services.filter((_, i) => i !== index);
+    setServices(upServices);
+  };
+
   return (
     <div>
       <Header />
@@ -55,6 +60,12 @@ function App() {
               {service.password}
               -
               { hidePasswords ? '******' : service.password }
+              <button
+                data-testid="remove-btn"
+                onClick={ () => handleRemoveSer(index) }
+              >
+                Remove
+              </button>
             </li>
           ))}
         </ul>

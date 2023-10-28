@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Swal from 'sweetalert2';
 
 type FormProps = {
   onCancel: () => void;
@@ -43,6 +44,13 @@ function Form({ onCancel, onCadastro }: FormProps) {
       setLogin('');
       setPassword('');
       setUrl('');
+
+      Swal.fire({
+        title: 'Serviço cadastrado com sucesso',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 
